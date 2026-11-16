@@ -17,18 +17,19 @@ public class Obstacle {
        this.y = y;
     }
 
-    public void newObstacles(Snake snek, Coin coin, int amount) {
+    public int newObstacles(Snake snek, Coin coin, int amount) {
         if (obstacles.size() > 50) {
-            return;
+            return 0;
         }
         Random rnd = new Random();
         Point p;
         for (int i=0; i<amount; i++) {
             do {
-                p = new Point(rnd.nextInt(x) + 1, rnd.nextInt(y));
+                p = new Point(rnd.nextInt(x), rnd.nextInt(y));
             } while (coin.getPos().equals(p) || snek.getBody().contains(p) || snek.getHead().equals(p));
             obstacles.add(p);
         }
+        return amount;
     }
 
     public Color getColor() {
